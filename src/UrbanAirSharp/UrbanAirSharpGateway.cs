@@ -218,13 +218,13 @@ namespace UrbanAirSharp
 
 		//=====================================================================================================================
 
-		private static TResponse SendRequest<TResponse>(BaseRequest<TResponse> request) where TResponse : BaseResponse, new()
+		private static async Task<TResponse> SendRequest<TResponse>(BaseRequest<TResponse> request) where TResponse : BaseResponse, new()
 		{
 			try
 			{
-				var requestTask = request.ExecuteAsync();
+				var requestTask = await request.ExecuteAsync();
 
-				return requestTask.Result;
+				return requestTask;
 			}
 			catch (Exception e)
 			{
