@@ -134,5 +134,23 @@ namespace UrbanAirSharp.Dto
             And = null;
             Not = null;
         }
+
+        public bool IsAll()
+        {
+            return
+            AndroidDeviceId == null &&
+            IosDeviceId == null &&
+            WindowsId == null &&
+            WindowsPhoneId == null &&
+            BlackberryId == null &&
+            SegmentId == null &&
+            Alias == null &&
+            Tag == null &&
+            Or == null &&
+            And == null &&
+            Not == null;
+        }
+
+        public static Audience All => new Audience();
     }
 }
