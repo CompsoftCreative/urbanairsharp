@@ -1,138 +1,138 @@
 ﻿// Copyright (c) 2014-2015 Jeff Gosling (jeffery.gosling@gmail.com)
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 using UrbanAirSharp.Type;
 
 namespace UrbanAirSharp.Dto
 {
-	public class Audience
-	{
-		[JsonProperty("apid")]
-		public String AndroidDeviceId { get; private set; }
+    public class Audience
+    {
+        [JsonProperty("apid")]
+        public String AndroidDeviceId { get; private set; }
 
-		[JsonProperty("device_token")]
-		public String IosDeviceId { get; private set; }
+        [JsonProperty("device_token")]
+        public String IosDeviceId { get; private set; }
 
-		[JsonProperty("wns")]
-		public String WindowsId { get; private set; }
+        [JsonProperty("wns")]
+        public String WindowsId { get; private set; }
 
-		[JsonProperty("mpns")]
-		public String WindowsPhoneId { get; private set; }
+        [JsonProperty("mpns")]
+        public String WindowsPhoneId { get; private set; }
 
-		[JsonProperty("device_pin")]
-		public String BlackberryId { get; private set; }
+        [JsonProperty("device_pin")]
+        public String BlackberryId { get; private set; }
 
-		[JsonProperty("segment")]
-		public String SegmentId { get; private set; }
+        [JsonProperty("segment")]
+        public String SegmentId { get; private set; }
 
-		[JsonProperty("alias")]
-		public String Alias { get; private set; }
+        [JsonProperty("alias")]
+        public String Alias { get; private set; }
 
-		[JsonProperty("tag")]
-		public String Tag { get; private set; }
+        [JsonProperty("tag")]
+        public String Tag { get; private set; }
 
         [JsonProperty("named_user")]
         public String NamedUser { get; private set; }
 
         [JsonProperty("OR")]
-		public IList<Audience> Or { get; private set; }
+        public IList<Audience> Or { get; private set; }
 
-		[JsonProperty("AND")]
-		public IList<Audience> And { get; private set; }
+        [JsonProperty("AND")]
+        public IList<Audience> And { get; private set; }
 
-		[JsonProperty("NOT")]
-		public Audience Not { get; private set; }
+        [JsonProperty("NOT")]
+        public Audience Not { get; private set; }
 
-		public Audience()
-		{
-		}
+        public Audience()
+        {
+        }
 
-		public Audience(AudienceType type, String value)
-		{
-			switch (type)
-			{
-				case AudienceType.Android:
-					AndroidDeviceId = value;
-					break;
-				case AudienceType.Ios:
-					IosDeviceId = value;
-					break;
-				case AudienceType.Windows:
-					WindowsId = value;
-					break;
-				case AudienceType.WindowsPhone:
-					WindowsPhoneId = value;
-					break;
-				case AudienceType.Blackberry:
-					BlackberryId = value;
-					break;
-				case AudienceType.Segment:
-					SegmentId = value;
-					break;
-				case AudienceType.Alias:
-					Alias = value;
-					break;
-				case AudienceType.Tag:
+        public Audience(AudienceType type, String value)
+        {
+            switch (type)
+            {
+                case AudienceType.Android:
+                    AndroidDeviceId = value;
+                    break;
+                case AudienceType.Ios:
+                    IosDeviceId = value;
+                    break;
+                case AudienceType.Windows:
+                    WindowsId = value;
+                    break;
+                case AudienceType.WindowsPhone:
+                    WindowsPhoneId = value;
+                    break;
+                case AudienceType.Blackberry:
+                    BlackberryId = value;
+                    break;
+                case AudienceType.Segment:
+                    SegmentId = value;
+                    break;
+                case AudienceType.Alias:
+                    Alias = value;
+                    break;
+                case AudienceType.Tag:
                     Tag = value;
                     break;
                 case AudienceType.NamedUser:
                     NamedUser = value;
-					break;
-			}
-		}
+                    break;
+            }
+        }
 
-		public Audience OrAudience(IList<Audience> audiences)
-		{
-			if (Or != null && audiences != null)
-			{
-				audiences = Or.Concat(audiences).ToList();
-			}
+        public Audience OrAudience(IList<Audience> audiences)
+        {
+            if (Or != null && audiences != null)
+            {
+                audiences = Or.Concat(audiences).ToList();
+            }
 
-			ClearAudience();
+            ClearAudience();
 
-			Or = audiences;
+            Or = audiences;
 
-			return this;
-		}
+            return this;
+        }
 
-		public Audience AndAudience(IList<Audience> audiences)
-		{
-			if (And != null && audiences != null)
-			{
-				audiences = And.Concat(audiences).ToList();
-			}
+        public Audience AndAudience(IList<Audience> audiences)
+        {
+            if (And != null && audiences != null)
+            {
+                audiences = And.Concat(audiences).ToList();
+            }
 
-			ClearAudience();
+            ClearAudience();
 
-			And = audiences;
+            And = audiences;
 
-			return this;
-		}
+            return this;
+        }
 
-		public Audience NotAudience(Audience audience)
-		{
-			ClearAudience();
+        public Audience NotAudience(Audience audience)
+        {
+            ClearAudience();
 
-			Not = audience;
+            Not = audience;
 
-			return this;
-		}
+            return this;
+        }
 
-		public void ClearAudience()
-		{
-			AndroidDeviceId = null;
-			IosDeviceId = null;
-			WindowsId = null;
-			WindowsPhoneId = null;
-			BlackberryId = null;
-			SegmentId = null;
-			Alias = null;
-			Tag = null;
-			Or = null;
-			And = null;
-			Not = null;
-		}
-	}
+        public void ClearAudience()
+        {
+            AndroidDeviceId = null;
+            IosDeviceId = null;
+            WindowsId = null;
+            WindowsPhoneId = null;
+            BlackberryId = null;
+            SegmentId = null;
+            Alias = null;
+            Tag = null;
+            Or = null;
+            And = null;
+            Not = null;
+        }
+    }
 }
