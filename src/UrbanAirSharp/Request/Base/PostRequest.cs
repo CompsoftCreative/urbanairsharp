@@ -32,11 +32,7 @@ namespace UrbanAirSharp.Request.Base
 
 		public override async Task<TResponse> ExecuteAsync()
 		{
-			Log.Debug(RequestMethod + " - " + Host + RequestUrl);
-
 			var json = JsonConvert.SerializeObject(Content, SerializerSettings);
-
-			Log.Debug("Payload - " + json);
 
 			var response = await HttpClient.PostAsync(Host + RequestUrl, new StringContent(json, Encoding, MediaType));
 

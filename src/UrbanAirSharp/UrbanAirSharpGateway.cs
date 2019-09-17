@@ -7,8 +7,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using log4net;
-using log4net.Config;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using UrbanAirSharp.Dto;
@@ -41,11 +39,8 @@ namespace UrbanAirSharp
 
 	public class UrbanAirSharpGateway
 	{
-		private static readonly ILog Log = LogManager.GetLogger(typeof(UrbanAirSharpGateway));
-
 		public UrbanAirSharpGateway(String appKey, String appMasterSecret)
 		{
-			XmlConfigurator.Configure();
 			ServiceModelConfig.Create(appKey, appMasterSecret);
 		}
 
@@ -228,7 +223,6 @@ namespace UrbanAirSharp
 			}
 			catch (Exception e)
 			{
-				Log.Error(request.GetType().FullName, e);
 
 				return new TResponse()
 				{
