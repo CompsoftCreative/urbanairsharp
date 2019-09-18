@@ -26,46 +26,13 @@ namespace UrbanAirSharp.Dto
 		[JsonProperty("notification")]
 		public Notification Notification { get; set; }
 
-		private Audience _audience;
+        [JsonConverter(typeof(AudienceConverter))]
+        [JsonProperty("audience")]
+		public Audience Audience { get; set; }
 
-		[JsonProperty("audience")]
-		public object Audience
-		{
-			get
-			{
-				if (_audience == null)
-				{
-					return "all";
-				}
-
-				return _audience;
-			}
-			set
-			{
-				var audience = value as Audience;
-				_audience = audience;
-			}
-		}
-
-		private IList<DeviceType> _deviceTypes;
-
+        [JsonConverter(typeof(DeviceTypeConverter))]
 		[JsonProperty("device_types")]
-		public object DeviceTypes {
-			get 
-			{
-				if (_deviceTypes == null)
-				{
-					return "all";
-				}
-					
-				return _deviceTypes;
-			}
-			set
-			{
-				var list = value as IList<DeviceType>;
-				_deviceTypes = list;
-			}
-		}
+		public IList<DeviceType> DeviceTypes { get; set; }
 
 		[JsonProperty("options")]
 		public Options Options { get; set; }
