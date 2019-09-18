@@ -55,6 +55,23 @@ namespace UrbanAirSharp
         }
 
         /// <summary>
+        /// - Broadcast to all devices
+        /// - Broadcast to one device type
+        /// - Send to a targeted device
+        /// - Broadcast to all devices with a different alert for each type
+        /// </summary>
+        /// <param name="alert">The message to be pushed</param>
+        /// <param name="deviceTypes">use null for broadcast</param>
+        /// <param name="deviceId">use null for broadcast or deviceTypes must contain 1 element that distinguishes this deviceId</param>
+        /// <param name="deviceAlerts">per device alert messages and extras</param>
+        /// <param name="customAudience">a more specific way to choose the audience for the push. If this is set, deviceId is ignored</param>
+        /// <returns></returns>
+        public async Task<PushResponse> PushAsync(String alert, IList<DeviceType> deviceTypes = null, String deviceId = null, IList<BaseAlert> deviceAlerts = null, Audience customAudience = null)
+        {
+            return await SendRequestAsync(new PushRequest(CreatePush(alert, deviceTypes, deviceId, deviceAlerts, customAudience)));
+        }
+
+        /// <summary>
         /// Validates a push request. Duplicates Push without actually sending the alert. See Push
         /// </summary>
         /// <param name="alert">The message to be pushed</param>
@@ -72,6 +89,11 @@ namespace UrbanAirSharp
         public ScheduleCreateResponse CreateSchedule(Schedule schedule)
         {
             return SendRequest(new ScheduleCreateRequest(schedule));
+        }
+
+        public async Task<ScheduleCreateResponse> CreateScheduleAsync(Schedule schedule)
+        {
+            return await SendRequestAsync(new ScheduleCreateRequest(schedule));
         }
 
         public ScheduleEditResponse EditSchedule(Guid scheduleId, Schedule schedule)
