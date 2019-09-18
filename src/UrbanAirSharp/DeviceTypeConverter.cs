@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using UrbanAirSharp.Type;
 
@@ -24,7 +25,28 @@ namespace UrbanAirSharp
 
         public override void WriteJson(JsonWriter writer, IList<DeviceType> value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            if (value.Contains(DeviceType.All))
+            {
+                serializer.Serialize(writer, "all");
+            }
+            else
+            {
+                var serialiserSettings = new JsonSerializerSettings
+                {
+                    NullValueHandling = serializer.NullValueHandling
+                };
+                serialiserSettings.Converters.Add(new StringEnumConverter(typeof(DeviceTypeNamingStrategy)));
+                var defaultSerialiser = JsonSerializer.CreateDefault(serialiserSettings);
+                defaultSerialiser.Serialize(writer, value);
+            }
+        }
+
+        private class DeviceTypeNamingStrategy : NamingStrategy
+        {
+            protected override string ResolvePropertyName(string name)
+            {
+                return name.ToLower();
+            }
         }
     }
 }
