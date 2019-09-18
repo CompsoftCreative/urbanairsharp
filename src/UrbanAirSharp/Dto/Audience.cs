@@ -133,6 +133,7 @@ namespace UrbanAirSharp.Dto
             Or = null;
             And = null;
             Not = null;
+            NamedUser = null;
         }
 
         public bool IsAll()
