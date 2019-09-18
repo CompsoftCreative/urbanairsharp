@@ -149,7 +149,8 @@ namespace UrbanAirSharp.Dto
             Tag == null &&
             Or == null &&
             And == null &&
-            Not == null;
+            Not == null &&
+            NamedUser == null;
         }
 
         public static Audience All => new Audience();
