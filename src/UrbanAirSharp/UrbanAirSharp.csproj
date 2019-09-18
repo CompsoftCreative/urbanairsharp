@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudienceConverter.cs" />
+    <Compile Include="DeviceTypeConverter.cs" />
     <Compile Include="Dto\BaseAlert.cs" />
     <Compile Include="Dto\DeviceToken.cs" />
     <Compile Include="Dto\AddRemoveList.cs" />
